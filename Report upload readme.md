@@ -13,6 +13,7 @@ The purpose of this challenge is to edit/refactor our original code to take fewe
 
 ###Comparison of Stock Performance Between 2017 and 2018 
 By looking at tables from the analysis, it’s clear to see that green energy stocks performed better in 2017 than they did in 2018. It seems that it was a very bullish year for most green energy stocks. We can see the tables here:
+
 ![2017_stocks.png](https://github.com/DaniliukK95/stock-analysis/blob/main/Resources/2017_Stocks.png) ![2018_stocks.png](https://github.com/DaniliukK95/stock-analysis/blob/main/Resources/2018_Stocks.png)
 
 We used formatting to color code which stocks went up in price from the beginning of the year to the end of the year. This is seen as green for increase in price and red for a decrease in price. This was achieved with the ‘interior’ function connected to the ‘color’ function. By using an If-Then statement combined with an If-Else statement, we were able to automate VBA to distinguish which stocks had a positive or negative price change, and then to color code them accordingly. 
