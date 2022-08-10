@@ -1,5 +1,5 @@
 #Stock Analysis
-Challenge 2 assignment 
+Challenge 2 Assignment 
 
 
 ##Overview
