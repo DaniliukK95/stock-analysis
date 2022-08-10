@@ -1,33 +1,32 @@
-#Stock Analysis
+# Stock Analysis
 Challenge 2 Assignment 
 
 
-##Overview
+## Overview
 
-###Background
+### Background
 Steve recently graduated with a finance degree! His parents are passionate about green energy and decided to invest in the stock ticker “DQ”. Steve, being the caring son that he is, wants to look further into their investment along with other potential investments that can fit their portfolio. Steve has come to us to analyze a handful of energy stocks including “DQ”. In Module two we wrote code in VBA to automate analysis for any stock in the data set. By the end of Module two, we created a VBA script that analyzes the information for the years 2017 and 2018 of the twelve stocks we have in the data set. Although great for our data set, what if we wanted to do the entire stock market over more than 2 years? The code we have already created might not be sufficient.
-###Purpose
+### Purpose
 The purpose of this challenge is to edit/refactor our original code to take fewer steps overall, use less memory, increase code performance, and improve the logic of the code for digestible reading. This will make the code more efficient in many areas. We will analyze the performance of the stocks to each other, and between the 2 years. We will also compare our old VBA script to the new one based on run time after refactoring.
 
-##Results of our Analysis
+## Results of our Analysis
 
-###Comparison of Stock Performance Between 2017 and 2018 
+### Comparison of Stock Performance Between 2017 and 2018 
 By looking at tables from the analysis, it’s clear to see that green energy stocks performed better in 2017 than they did in 2018. It seems that it was a very bullish year for most green energy stocks. We can see the tables here:
 
 ![2017_stocks.png](https://github.com/DaniliukK95/stock-analysis/blob/main/Resources/2017_Stocks.png) ![2018_stocks.png](https://github.com/DaniliukK95/stock-analysis/blob/main/Resources/2018_Stocks.png)
 
-We used formatting to color code which stocks went up in price from the beginning of the year to the end of the year. This is seen as green for increase in price and red for a decrease in price. This was achieved with the ‘interior’ function connected to the ‘color’ function. By using an If-Then statement combined with an If-Else statement, we were able to automate VBA to distinguish which stocks had a positive or negative price change, and then to color code them accordingly. 
-‘’’
+We used formatting to color code which stocks went up in price from the beginning of the year to the end of the year. This is seen as green for increase in price and red for a decrease in price. This was achieved with the `interior` function connected to the `color` function. By using an If-Then statement combined with an If-Else statement, we were able to automate VBA to distinguish which stocks had a positive or negative price change, and then to color code them accordingly. 
+```
 If Cells(i, 3) > 0 Then
 Cells(i, 3).Interior.Color = vbGreen
 Else
 Cells(i, 3).Interior.Color = vbRed
 End If
-‘’’
+```
 This makes the analysis easier to look at from a glimpse! We can clearly see majority of the stocks are green in 2017 compared to 2018. Looking at the total daily volume to me doesn’t really provide much information. The reason why I say this is because if a stock is valued at $1.00, it does not take much to buy many shares. On the other hand, if a stock is worth $1000 per share, it would not be surprising to see a lower daily volume than the cheaper stock. What would be more tactical to use regarding volume is comparing It to its valuation. We can also see that there isn’t a clear answer as to if the total daily volume between the years had some type of correlation to its return. Although the tickers “ENPH” and “RUN” continued to run bullish in 2018 with increasing volume, “TERP” had an increase in volume but stayed bearish in both years. Some of the other stocks increased in volume but instead resulted in negative returns. So not much can be determined by this data. From the color coding and percentages, it is clear to see that the beginning of 2017 was the year to invest. Since Steve’s parents invested, I’m assuming after 2018, this does not mean that they made a bad investment! The stock market has many variables to factor in like news, economy, and even supply and demand from a price action viewpoint. This bearish 2018 could just be a correction in price for the rally it had in 2017 and could possibly make another run in 2019. Or maybe there was a green energy bubble in 2017 which popped and is now making its way down. To most people, this probably is a terrible sign, but to another investor this could be a discounted price! 
 
-###Execution Time of the Original Script VS the Refactored Script
-
+### Execution Time of the Original Script VS the Refactored Script
 In my process of refactoring the VBA script, I noticed extreme differences immediately. I also included suggestions on speeding up run time in VBA using other code from research. The run time for the original code for 2017 and 2018 was 0.67 seconds and 0.62 seconds respectively as seen in these screen shots: 
 
 ![original_VBA_runtime_2017.png](https://github.com/DaniliukK95/stock-analysis/blob/main/Resources/Original_VBA_RunTime_2017.png) ![original_VBA_runtime_2018.png](https://github.com/DaniliukK95/stock-analysis/blob/main/Resources/Original_VBA_RunTime_2018.png) 
@@ -41,7 +40,7 @@ That’s a whole 0.6 seconds decreased, which doesn’t seem like much, but if w
 ![VBA_Challenge_2017.png](https://github.com/DaniliukK95/stock-analysis/blob/main/Resources/VBA_Challenge_2017.png) ![VBA_Challenge_2018.png](https://github.com/DaniliukK95/stock-analysis/blob/main/Resources/VBA_Challenge_2018.png)
 
 One of the main changes that helped bring down the run time was to get rid of the nested for loop and to use one condition only in the If-Then statements. The nested for loop to get the total daily volume and the return values: 
-‘’’
+```
 For i = 0 To 11
 ticker = Tickers(i)
 totalvolume = 0
@@ -57,9 +56,9 @@ If Cells(j + 1, 1).Value <> ticker And Cells(j, 1).Value = ticker Then
 endingprice = Cells(j, 6).Value
 End If
 Next j
-‘’’
+```
 Was converted into two For loops with one condition in each If-Then statement:
-‘’’
+```
 For i = 0 To 
 TickerVolumes(i) = 0
 Next i
@@ -70,11 +69,12 @@ TickerStartingPrices(tickerindex) = Cells(i, 6).Value
 End If
 If Cells(i + 1, 1).Value <> Tickers(tickerindex) Then
 TickerEndingPrices(tickerindex) = Cells(i, 6).Value
- tickerindex = tickerindex + 1
+tickerindex = tickerindex + 1
 End If
 Next i
-‘’’
-When working with a classmate, they had a nested For loop in their code which ended up taking just as much time as the original code. When comparing my time to his, it was clear that the nested For loop was doing more harm than good. The code used from the internet was ‘Application.ScreenUpdating = False’ and ‘Application.Calculation = xlCalculationManual’. These help to prevent the screen from flickering and updating while running the code, and for the application to prevent calculations from updating while running the code until the end. 
+```
+
+When working with a classmate, they had a nested For loop in their code which ended up taking just as much time as the original code. When comparing my time to his, it was clear that the nested For loop was doing more harm than good. The code used from the internet was `Application.ScreenUpdating = False` and `Application.Calculation = xlCalculationManual`. These help to prevent the screen from flickering and updating while running the code, and for the application to prevent calculations from updating while running the code until the end. 
 
 
 ##
