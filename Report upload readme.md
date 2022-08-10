@@ -27,11 +27,20 @@ End If
 This makes the analysis easier to look at from a glimpse! We can clearly see majority of the stocks are green in 2017 compared to 2018. Looking at the total daily volume to me doesn’t really provide much information. The reason why I say this is because if a stock is valued at $1.00, it does not take much to buy many shares. On the other hand, if a stock is worth $1000 per share, it would not be surprising to see a lower daily volume than the cheaper stock. What would be more tactical to use regarding volume is comparing It to its valuation. We can also see that there isn’t a clear answer as to if the total daily volume between the years had some type of correlation to its return. Although the tickers “ENPH” and “RUN” continued to run bullish in 2018 with increasing volume, “TERP” had an increase in volume but stayed bearish in both years. Some of the other stocks increased in volume but instead resulted in negative returns. So not much can be determined by this data. From the color coding and percentages, it is clear to see that the beginning of 2017 was the year to invest. Since Steve’s parents invested, I’m assuming after 2018, this does not mean that they made a bad investment! The stock market has many variables to factor in like news, economy, and even supply and demand from a price action viewpoint. This bearish 2018 could just be a correction in price for the rally it had in 2017 and could possibly make another run in 2019. Or maybe there was a green energy bubble in 2017 which popped and is now making its way down. To most people, this probably is a terrible sign, but to another investor this could be a discounted price! 
 
 ###Execution Time of the Original Script VS the Refactored Script
-In my process of refactoring the VBA script, I noticed extreme differences immediately. I also included suggestions on speeding up run time in VBA using other code from research. The run time for the original code for 2017 and 2018 was 0.67 seconds and 0.62 seconds respectively as seen in these screen shots ![original_VBA_runtime_2017.png](https://github.com/DaniliukK95/stock-analysis/blob/main/Resources/Original_VBA_RunTime_2017.png) ![original_VBA_runtime_2018.png](https://github.com/DaniliukK95/stock-analysis/blob/main/Resources/Original_VBA_RunTime_2018.png) 
+
+In my process of refactoring the VBA script, I noticed extreme differences immediately. I also included suggestions on speeding up run time in VBA using other code from research. The run time for the original code for 2017 and 2018 was 0.67 seconds and 0.62 seconds respectively as seen in these screen shots: 
+
+![original_VBA_runtime_2017.png](https://github.com/DaniliukK95/stock-analysis/blob/main/Resources/Original_VBA_RunTime_2017.png) ![original_VBA_runtime_2018.png](https://github.com/DaniliukK95/stock-analysis/blob/main/Resources/Original_VBA_RunTime_2018.png) 
+
 After refactoring for the first time, I was able to achieve an incredible speed of 0.097 seconds for 2017 and 2018. 
-![VBA_Challenge_2017_before internet help.png](https://github.com/DaniliukK95/stock-analysis/blob/main/Resources/VBA_Challenge_2017_before%20internet%20help.png) ![VBA_Challenge_2018_before internet help.png](https://github.com/DaniliukK95/stock-analysis/blob/main/Resources/VBA_Challenge_2018_before%20internet%20help.png). 
-That’s a whole 0.6 seconds decreased, which doesn’t seem like much, but if we had hundreds of thousands of data points, it could make a difference. After adding 4 extra lines of code from [Tips to Speed up VBA Code](https://eident.co.uk/2016/03/top-ten-tips-to-speed-up-your-vba-code/) I was able to further drop the run time to 0.062 seconds for both 2017 and 2018 ![VBA_Challenge_2017.png](https://github.com/DaniliukK95/stock-analysis/blob/main/Resources/VBA_Challenge_2017.png) ![VBA_Challenge_2018.png](https://github.com/DaniliukK95/stock-analysis/blob/main/Resources/VBA_Challenge_2018.png) 
-One of the main edits that helped bring down the run time was to get rid of the nested for loop and to use one condition only in the If-Then statements. The nested for loop to get the total daily volume and the return values 
+
+![VBA_Challenge_2017_before internet help.png](https://github.com/DaniliukK95/stock-analysis/blob/main/Resources/VBA_Challenge_2017_before%20internet%20help.png) ![VBA_Challenge_2018_before internet help.png](https://github.com/DaniliukK95/stock-analysis/blob/main/Resources/VBA_Challenge_2018_before%20internet%20help.png)
+
+That’s a whole 0.6 seconds decreased, which doesn’t seem like much, but if we had hundreds of thousands of data points, it could make a difference. After adding 4 extra lines of code from [Tips to Speed up VBA Code](https://eident.co.uk/2016/03/top-ten-tips-to-speed-up-your-vba-code/) I was able to further drop the run time to 0.062 seconds for both 2017 and 2018. 
+
+![VBA_Challenge_2017.png](https://github.com/DaniliukK95/stock-analysis/blob/main/Resources/VBA_Challenge_2017.png) ![VBA_Challenge_2018.png](https://github.com/DaniliukK95/stock-analysis/blob/main/Resources/VBA_Challenge_2018.png)
+
+One of the main changes that helped bring down the run time was to get rid of the nested for loop and to use one condition only in the If-Then statements. The nested for loop to get the total daily volume and the return values: 
 ‘’’
 For i = 0 To 11
 ticker = Tickers(i)
@@ -49,7 +58,7 @@ endingprice = Cells(j, 6).Value
 End If
 Next j
 ‘’’
-Was converted into two For loops with one condition in each If-Then statement
+Was converted into two For loops with one condition in each If-Then statement:
 ‘’’
 For i = 0 To 
 TickerVolumes(i) = 0
