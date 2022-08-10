@@ -2,7 +2,7 @@
 Repo for Module 2
 
 
-beginning of challenege 2
+beginning of challenge 2
 # Stock Analysis
 Challenge 2 Assignment 
 
